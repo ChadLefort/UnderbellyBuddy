@@ -1,7 +1,7 @@
 ## Interface: 70100
 ## Title: UnderbellyBuddy
 ## Notes: Dalaran bodyguard buff tracker
-## Version: 1.0
+## Version: 1.0.0
 ## DefaultState: enabled
 ## Author: Pigletoos
 ## SavedVariables: UnderbellyBuddyDB
