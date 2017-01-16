@@ -1,6 +1,5 @@
 ubb = LibStub('AceAddon-3.0'):NewAddon('UnderbellyBuddy', 'AceConsole-3.0', 'AceEvent-3.0')
 
-local version = '@project-version@'
 local buffName, _, buffIcon = GetSpellInfo(203894)
 local fontName = GameFontHighlightSmallOutline:GetFont()
 local inUnderbelly = false
@@ -118,7 +117,7 @@ local options = {
                 },
                 about = {
                     order = 8,
-                    name = string.format('Version: %s Created by Pigletoos of Skywall', version),
+                    name = 'Version: @project-version@ Created by Pigletoos of Skywall',
                     type = 'description'
                 },
             }

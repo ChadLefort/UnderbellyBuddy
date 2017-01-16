@@ -1,11 +1,17 @@
 ## Interface: 70100
 ## Title: UnderbellyBuddy
-## Notes: Dalaran bodyguard buff tracker
+## Notes: Underbelly hired guard buff duration timer
 ## Version: @project-version@
 ## DefaultState: enabled
 ## Author: Pigletoos
 ## SavedVariables: UnderbellyBuddyDB
 ## OptionalDeps: Ace3, LibCandyBar-3.0, LibStub, CallbackHandler-1.0
+## X-Category: Buffs & Debuffs
+## X-Website: https://mods.curse.com/addons/wow/257332-underbelly-buddy
+## X-Curse-Packaged-Version: @project-version@
+## X-Curse-Project-Name: Underbelly Buddy
+## X-Curse-Project-ID: 257332
+## X-License: MIT License
 
 LoadLibs.xml
 UnderbellyBuddy.lua
