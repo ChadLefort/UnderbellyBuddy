@@ -23,7 +23,7 @@ Found under **Interface > AddOns Tab > UnderbellyBuddy**
 - `lock` - Locks the timer bar in place
 - `warnings` - Displays warning messages after a certain amount of time
 - `bar` - Shows a test bar to move or adjust size
-- `size` *number (1-5)* - Changes the size of the timer bar
+- `size` *decimal (1.00-5.00)* - Changes the size of the timer bar
 
 #### Profile
 

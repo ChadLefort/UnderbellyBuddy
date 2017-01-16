@@ -1,7 +1,7 @@
 ubb = LibStub('AceAddon-3.0'):NewAddon('UnderbellyBuddy', 'AceConsole-3.0', 'AceEvent-3.0')
 
-local version = '1.0.0'
-local buffName, _, buffIcon = GetSpellInfo(203894) -- 203894 (Hired Guard) | 72968 (Precious's Ribbon)
+local version = '@project-version@'
+local buffName, _, buffIcon = GetSpellInfo(203894)
 local fontName = GameFontHighlightSmallOutline:GetFont()
 local inUnderbelly = false
 local hasGuardBuff = false
