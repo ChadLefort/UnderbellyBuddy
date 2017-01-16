@@ -13,7 +13,7 @@ Found under **Interface > AddOns Tab > UnderbellyBuddy**
 
 ### Slash Commands
 
-- `/ubb` - Main command
+- `/ubb` - Shows all commands and descriptions
 
 #### Main
 
