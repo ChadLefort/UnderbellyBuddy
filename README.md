@@ -13,25 +13,25 @@ Found under **Interface > AddOns Tab > UnderbellyBuddy**
 
 ### Slash Commands
 
-- `/ubb` - Shows all commands and descriptions
+- `/ub` - Shows all commands and descriptions
 
 #### Main
 
-- `/ubb main enable` - Enables / disables the addon
-- `/ubb main show` - Shows the bar if you dismissed it away
-- `/ubb main hide` - Hides the bar if you dismissed it away
-- `/ubb main lock` - Locks the timer bar in place
-- `/ubb main warnings` - Displays warning messages after a certain amount of time
-- `/ubb main bar` - Shows a test bar to move or adjust size
-- `/ubb main size` *decimal (1.00-5.00)* - Changes the size of the timer bar
+- `/ub main enable` - Enables / disables the addon
+- `/ub main show` - Shows the bar if you dismissed it away
+- `/ub main hide` - Hides the bar if you dismissed it away
+- `/ub main lock` - Locks the timer bar in place
+- `/ub main warnings` - Displays warning messages after a certain amount of time
+- `/ub main bar` - Shows a test bar to move or adjust size
+- `/ub main size` *decimal (1.00-5.00)* - Changes the size of the timer bar
 
 #### Profile
 
-- `/ubb profile reset` - Reset the current profile to the default
-- `/ubb profile new` *profile name* - Create a new empty profile
-- `/ubb profile choose` *profile name* - Select one of your currently available profiles
-- `/ubb profile copyfrom` *profile name* - Copy the settings from one existing profile into the currently active profile
-- `/ubb profile delete` *profile name* - Deletes a profile from the database
+- `/ub profile reset` - Reset the current profile to the default
+- `/ub profile new` *profile name* - Create a new empty profile
+- `/ub profile choose` *profile name* - Select one of your currently available profiles
+- `/ub profile copyfrom` *profile name* - Copy the settings from one existing profile into the currently active profile
+- `/ub profile delete` *profile name* - Deletes a profile from the database
 
 ### Found a Bug?
 

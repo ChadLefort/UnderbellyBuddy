@@ -15,3 +15,5 @@
 
 LoadLibs.xml
 UnderbellyBuddy.lua
+Modules\HiredGuard.lua
+Modules\Config.lua
