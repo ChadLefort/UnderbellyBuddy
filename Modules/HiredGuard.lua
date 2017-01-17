@@ -30,24 +30,13 @@ function ubHiredGuard:OnInitialize()
     for _, value in pairs(secondsToDisplayWarning) do
         run.warning[value] = false
     end
-
-    bar.container = CreateFrame('Frame', 'UnderbellyBuddyTimerBar', UIParent)
-    bar.container:SetSize(barSize.width, barSize.height)
-    bar.container:SetMovable(true)
-    bar.container:SetUserPlaced(true)
-    bar.container:SetPoint('CENTER', 0, 150)
-    bar.container:EnableMouse(true)
-    bar.container:RegisterForDrag('LeftButton')
-    bar.container:SetScript('OnDragStart', function(self) if not ub.db.profile.lock then self:StartMoving() end end)
-    bar.container:SetScript('OnDragStop', function(self) self:StopMovingOrSizing() end)
-    bar.container:SetScript('OnMouseDown', function(self, button) if button == 'RightButton' then self:Hide() bar.timer:Hide() end end)    
 end
 
 function ubHiredGuard:OnEnable()
     local candyBar = LibStub('LibCandyBar-3.0')
 
     bar.timer = candyBar:New('Interface\\AddOns\\UnderbellyBuddy\\Media\\bar', barSize.width, barSize.height)
-    bar.timer:SetPoint('CENTER', bar.container)
+    bar.timer:SetPoint('CENTER', ub.container)
     bar.timer:SetLabel(buffName)
     bar.timer:SetIcon(buffIcon)
     bar.timer.candyBarLabel:SetFont(fontName, barSize.font)
@@ -55,7 +44,7 @@ function ubHiredGuard:OnEnable()
     bar.timer:Hide()
 
     bar.test = candyBar:New('Interface\\AddOns\\UnderbellyBuddy\\Media\\bar', barSize.width, barSize.height)
-    bar.test:SetPoint('CENTER', bar.container)
+    bar.test:SetPoint('CENTER', ub.container)
     bar.test:SetLabel('Test Bar')
     bar.test:SetIcon(buffIcon)
     bar.test.candyBarLabel:SetFont(fontName, barSize.font)
