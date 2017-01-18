@@ -1,6 +1,6 @@
 # Underbelly Buddy
 
-Available to download on Curse by clicking [https://mods.curse.com/addons/wow/257332-underbelly-buddy](here) or via the [https://www.curse.com/](Curse client). You can also check out this project on [https://wow.curseforge.com/projects/underbelly-buddy](CurseForge).
+Available to download on Curse by clicking [here](https://mods.curse.com/addons/wow/257332-underbelly-buddy) or via the [Curse client](https://www.curse.com/). You can also check out this project on [CurseForge](https://wow.curseforge.com/projects/underbelly-buddy).
 
 ### About
 
