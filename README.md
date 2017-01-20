@@ -1,5 +1,7 @@
 # Underbelly Buddy
 
+Available to download on Curse by clicking [here](https://mods.curse.com/addons/wow/257332-underbelly-buddy) or via the [Curse client](https://www.curse.com/). You can also check out this project on [CurseForge](https://wow.curseforge.com/projects/underbelly-buddy).
+
 ### About
 
 A World of Wacraft addon that tracks the time of the hired guard buff obtainable in the Underbelly of Dalaran. 
