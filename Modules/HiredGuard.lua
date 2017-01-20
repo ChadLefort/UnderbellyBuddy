@@ -5,7 +5,6 @@ local buffName, _, buffIcon = GetSpellInfo(203894)
 local fontName = GameFontHighlightSmallOutline:GetFont()
 local inUnderbelly = false
 local hasGuardBuff = false
-local bar = {}
 local barSize = {}
 local secondsToDisplayWarning = {30, 90}
 local barBase = {
@@ -35,21 +34,22 @@ end
 function ubHiredGuard:OnEnable()
     local candyBar = LibStub('LibCandyBar-3.0')
 
-    bar.timer = candyBar:New('Interface\\AddOns\\UnderbellyBuddy\\Media\\bar', barSize.width, barSize.height)
-    bar.timer:SetPoint('CENTER', ub.container)
-    bar.timer:SetLabel(buffName)
-    bar.timer:SetIcon(buffIcon)
-    bar.timer.candyBarLabel:SetFont(fontName, barSize.font)
-    bar.timer.candyBarDuration:SetFont(fontName, barSize.font)
-    bar.timer:Hide()
+    ub.bar = {}
+    ub.bar.timer = candyBar:New('Interface\\AddOns\\UnderbellyBuddy\\Media\\bar', barSize.width, barSize.height)
+    ub.bar.timer:SetPoint('CENTER', ub.container)
+    ub.bar.timer:SetLabel(buffName)
+    ub.bar.timer:SetIcon(buffIcon)
+    ub.bar.timer.candyBarLabel:SetFont(fontName, barSize.font)
+    ub.bar.timer.candyBarDuration:SetFont(fontName, barSize.font)
+    ub.bar.timer:Hide()
 
-    bar.test = candyBar:New('Interface\\AddOns\\UnderbellyBuddy\\Media\\bar', barSize.width, barSize.height)
-    bar.test:SetPoint('CENTER', ub.container)
-    bar.test:SetLabel('Test Bar')
-    bar.test:SetIcon(buffIcon)
-    bar.test.candyBarLabel:SetFont(fontName, barSize.font)
-    bar.test.candyBarDuration:SetFont(fontName, barSize.font)
-    bar.test:Hide()
+    ub.bar.test = candyBar:New('Interface\\AddOns\\UnderbellyBuddy\\Media\\bar', barSize.width, barSize.height)
+    ub.bar.test:SetPoint('CENTER', ub.container)
+    ub.bar.test:SetLabel('Test Bar')
+    ub.bar.test:SetIcon(buffIcon)
+    ub.bar.test.candyBarLabel:SetFont(fontName, barSize.font)
+    ub.bar.test.candyBarDuration:SetFont(fontName, barSize.font)
+    ub.bar.test:Hide()
 
     self:RegisterEvent('PLAYER_ENTERING_WORLD', 'CheckBodyGuard')
     self:RegisterEvent('ZONE_CHANGED_NEW_AREA', 'CheckBodyGuard')
@@ -100,10 +100,10 @@ function ubHiredGuard:StartBar()
         hasGuardBuff = self:CheckBuff()
 
         if hasGuardBuff and not run.bar then
-            bar.test:Hide()
-            bar.timer:AddUpdateFunction(function(bar) self:CheckRemaingTime(bar) end)
-            bar.timer:SetDuration(300)
-            bar.timer:Start()
+            ub.bar.test:Hide()
+            ub.bar.timer:AddUpdateFunction(function(bar) self:CheckRemaingTime(bar) end)
+            ub.bar.timer:SetDuration(300)
+            ub.bar.timer:Start()
         end
 
         if not hasGuardBuff then
@@ -116,7 +116,7 @@ end
 
 function ubHiredGuard:StopBar()
     if run.bar then
-        bar.timer:Stop()
+        ub.bar.timer:Stop()
         run.bar = false
 
         for _, value in pairs(secondsToDisplayWarning) do
@@ -161,16 +161,18 @@ function ubHiredGuard:SetEnabled(_, value)
 end
 
 function ubHiredGuard:ShowBar() 
-    if run.bar then 
-        bar.timer:Show() 
+    if run.bar then
+        ub.container:Show()  
+        ub.bar.timer:Show() 
     else 
         ub:Print('No bar to display') 
     end 
 end
 
 function ubHiredGuard:HideBar()
-    if run.bar then 
-        bar.timer:Hide() 
+    if run.bar then
+        ub.container:Hide() 
+        ub.bar.timer:Hide() 
     else 
         ub:Print('No bar to hide') 
     end 
@@ -178,8 +180,8 @@ function ubHiredGuard:HideBar()
 
 function ubHiredGuard:ShowTestBar()
     if not run.bar then
-        bar.test:SetDuration(20)
-        bar.test:Start()
+        ub.bar.test:SetDuration(20)
+        ub.bar.test:Start()
     else
         ub:Print(string.format('%s is in progress and the test bar cannot be displayed.', buffName))
     end
@@ -188,11 +190,11 @@ end
 function ubHiredGuard:SetSize(_, value) 
     self.db.profile.size = value
     
-    bar.timer:SetSize(value * barBase.width, value * barBase.height)
-    bar.timer.candyBarLabel:SetFont(fontName, value * barBase.font)
-    bar.timer.candyBarDuration:SetFont(fontName, value * barBase.font)
+    ub.bar.timer:SetSize(value * barBase.width, value * barBase.height)
+    ub.bar.timer.candyBarLabel:SetFont(fontName, value * barBase.font)
+    ub.bar.timer.candyBarDuration:SetFont(fontName, value * barBase.font)
 
-    bar.test:SetSize(value * barBase.width, value * barBase.height)
-    bar.test.candyBarLabel:SetFont(fontName, value * barBase.font)
-    bar.test.candyBarDuration:SetFont(fontName, value * barBase.font)
+    ub.bar.test:SetSize(value * barBase.width, value * barBase.height)
+    ub.bar.test.candyBarLabel:SetFont(fontName, value * barBase.font)
+    ub.bar.test.candyBarDuration:SetFont(fontName, value * barBase.font)
 end

@@ -21,5 +21,5 @@ function ub:OnInitialize()
     ub.container:RegisterForDrag('LeftButton')
     ub.container:SetScript('OnDragStart', function(self) if not ub.db.profile.lock then self:StartMoving() end end)
     ub.container:SetScript('OnDragStop', function(self) self:StopMovingOrSizing() end)
-    ub.container:SetScript('OnMouseDown', function(self, button) if button == 'RightButton' then self:Hide() bar.timer:Hide() end end)    
+    ub.container:SetScript('OnMouseDown', function(self, button) if button == 'RightButton' then self:Hide() ub.bar.timer:Hide() end end)    
 end
