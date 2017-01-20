@@ -19,5 +19,5 @@ ignore:
     - LICENSE.md
 
 manual-changelog:
-    filename: CHANGELOG.txt
+    filename: CHANGELOG.md
     markup-type: markdown
