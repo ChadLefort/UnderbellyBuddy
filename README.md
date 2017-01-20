@@ -7,7 +7,10 @@ Available to download on Curse by clicking [here](https://mods.curse.com/addons/
 A World of Wacraft addon that tracks the time of the hired guard buff obtainable in the Underbelly of Dalaran. 
 The hired guard prevents you from PvP flagging when the Underbelly turns into a PvP free for all.
 
-**NOTE:** The timer bar will not persist through UI reloads.
+### Info
+
+- The timer bar will not persist through UI reloads.
+- The timer bar can be dismissed by right clicking on it.
 
 ### GUI Options
 
