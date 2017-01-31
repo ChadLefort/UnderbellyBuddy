@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.0.3 (01/30/2017)
+
+**Imporvements:**
+
+- Added warning sound when warning message pops up.
+
 ## 1.0.2 (01/30/2017)
 
 **Fixed bugs:**

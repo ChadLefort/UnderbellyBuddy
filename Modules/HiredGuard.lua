@@ -143,7 +143,8 @@ function ubHiredGuard:CheckRemaingTime(bar)
         end
 
         for _, value in pairs(secondsToDisplayWarning) do
-            if timeLeft == value and not run.warning[value] then 
+            if timeLeft == value and not run.warning[value] then
+                PlaySoundFile('Sound\\Interface\\RaidWarning.ogg') 
                 RaidNotice_AddMessage(RaidWarningFrame, string.format('Only %s remaining for %s!', timeDisplay, buffName), ChatTypeInfo['RAID_WARNING'])
                 run.warning[value] = true
             end
