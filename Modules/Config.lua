@@ -1,6 +1,9 @@
 ub = LibStub('AceAddon-3.0'):GetAddon('UnderbellyBuddy')
 ubHiredGuard = ub:GetModule('HiredGuard')
-ubConfig = ub:NewModule('UnderbellyBuddyConfig')
+ubConfig = ub:NewModule('UnderbellyBuddyConfig', 'AceConsole-3.0')
+
+local AceConfig = LibStub('AceConfig-3.0')
+local AceConfigDialog = LibStub('AceConfigDialog-3.0')
 
 function ubConfig:OnInitialize()
     self.db = ub.db
@@ -9,13 +12,20 @@ function ubConfig:OnInitialize()
     
     options.args.profile = LibStub('AceDBOptions-3.0'):GetOptionsTable(self.db)
 
-    LibStub('AceConfig-3.0'):RegisterOptionsTable('UnderbellyBuddy', options, {'ub', 'UnderbellyBuddy'})
-    LibStub('AceConfigDialog-3.0'):AddToBlizOptions('UnderbellyBuddy', 'UnderbellyBuddy', nil, 'main') 
-    LibStub('AceConfigDialog-3.0'):AddToBlizOptions('UnderbellyBuddy', 'Profiles', 'UnderbellyBuddy', 'profile')
+    AceConfig:RegisterOptionsTable('UnderbellyBuddy', options)
+    AceConfigDialog:AddToBlizOptions('UnderbellyBuddy', 'UnderbellyBuddy', nil, 'main') 
+    AceConfigDialog:AddToBlizOptions('UnderbellyBuddy', 'Profiles', 'UnderbellyBuddy', 'profile')
+
+    self:RegisterChatCommand('ub', 'OpenOptions')
 
     self.db.RegisterCallback(self, 'OnProfileChanged', 'RefreshConfig')
     self.db.RegisterCallback(self, 'OnProfileCopied', 'RefreshConfig')
     self.db.RegisterCallback(self, 'OnProfileReset', 'RefreshConfig')
+end
+
+function ubConfig:OpenOptions()
+    AceConfigDialog:SetDefaultSize('UnderbellyBuddy', 600, 425)
+    AceConfigDialog:Open('UnderbellyBuddy')
 end
 
 function ubConfig:RefreshConfig()
@@ -47,24 +57,8 @@ function ubConfig:GetOptions()
                         set = function(_, value) ubHiredGuard:SetEnabled(_, value) end,
                         get = function() return ub.db.profile.enable end
                     },
-                    show = {
-                        order = 1,
-                        guiHidden = true,
-                        name = 'Show Bar',
-                        desc = 'Shows the bar if you dismissed it away',
-                        type = 'execute',
-                        func = function() ubHiredGuard:ShowBar() end
-                    },
-                    hide = {
-                        order = 2,
-                        guiHidden = true,
-                        name = 'Hide Bar',
-                        desc = 'Hides the bar if you dismissed it away',
-                        type = 'execute',
-                        func = function() ubHiredGuard:HideBar() end
-                    },
                     lock = {
-                        order = 3,
+                        order = 0.2,
                         name = 'Lock Timer',
                         desc = 'Locks the timer bar in place',
                         width = 'full',
@@ -73,7 +67,7 @@ function ubConfig:GetOptions()
                         get = function() return ub.db.profile.lock end
                     },
                     warnings = {
-                        order = 4,
+                        order = 0.3,
                         name = 'Display Warnings',
                         desc = 'Displays warning messages after a certain amount of time',
                         width = 'full',
@@ -82,12 +76,12 @@ function ubConfig:GetOptions()
                         get = function() return ub.db.profile.warning end
                     },
                     header2 = {
-                    order = 5,
+                    order = 1,
                         name = 'Appearance',
                         type = 'header'
                     },
                     bar = {
-                        order = 5.1,
+                        order = 1.1,
                         name = 'Test Bar',
                         desc = 'Shows a test bar to move or adjust size',
                         width = 'full',
@@ -95,7 +89,7 @@ function ubConfig:GetOptions()
                         func = function() ubHiredGuard:ShowTestBar() end
                     },
                     size = {
-                        order = 6,
+                        order = 1.2,
                         name = 'Bar Size',
                         desc = 'Changes the size of the timer bar',
                         width = 'full',
@@ -106,12 +100,12 @@ function ubConfig:GetOptions()
                         get = function() return ub.db.profile.size end
                     },
                     header3 = {
-                        order = 7,
+                        order = 2,
                         name = 'About',
                         type = 'header'
                     },
                     about = {
-                        order = 8,
+                        order = 2.1,
                         name = 'Version: @project-version@ Created by Pigletoos of Skywall',
                         type = 'description'
                     },

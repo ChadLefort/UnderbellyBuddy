@@ -29,6 +29,9 @@ function ubHiredGuard:OnInitialize()
     for _, value in pairs(secondsToDisplayWarning) do
         run.warning[value] = false
     end
+
+    self:RegisterChatCommand('ubshow', 'ShowBar')
+    self:RegisterChatCommand('ubhide', 'HideBar')
 end
 
 function ubHiredGuard:OnEnable()
