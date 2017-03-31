@@ -1,4 +1,4 @@
-## Interface: 70100
+## Interface: 70200
 ## Title: UnderbellyBuddy
 ## Notes: Underbelly hired guard buff duration timer
 ## Version: @project-version@
@@ -7,7 +7,7 @@
 ## SavedVariables: UnderbellyBuddyDB
 ## OptionalDeps: Ace3, LibCandyBar-3.0, LibStub, CallbackHandler-1.0
 ## X-Category: Buffs & Debuffs
-## X-Website: https://mods.curse.com/addons/wow/257332-underbelly-buddy
+## X-Website: https://wow.curseforge.com/projects/underbelly-buddy
 ## X-Curse-Packaged-Version: @project-version@
 ## X-Curse-Project-Name: Underbelly Buddy
 ## X-Curse-Project-ID: 257332
@@ -16,4 +16,4 @@
 LoadLibs.xml
 UnderbellyBuddy.lua
 Modules\HiredGuard.lua
-Modules\Config.lua
+Modules\Options.lua

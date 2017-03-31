@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.0.4 (01/30/2017)
+
+**Imporvements:**
+
+- Updated version for 7.2
+- Minor code cleanup.
+
 ## 1.0.3 (01/30/2017)
 
 **Imporvements:**

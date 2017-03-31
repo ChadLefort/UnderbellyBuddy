@@ -1,6 +1,5 @@
-ub = LibStub('AceAddon-3.0'):GetAddon('UnderbellyBuddy')
-ubHiredGuard = ub:NewModule('HiredGuard', 'AceConsole-3.0', 'AceEvent-3.0')
-
+local UnderbellyBuddy = LibStub('AceAddon-3.0'):GetAddon('UnderbellyBuddy')
+local UnderbellyBuddyHiredGuard = UnderbellyBuddy:NewModule('UnderbellyBuddyHiredGuard', 'AceConsole-3.0', 'AceEvent-3.0')
 local buffName, _, buffIcon = GetSpellInfo(203894)
 local fontName = GameFontHighlightSmallOutline:GetFont()
 local inUnderbelly = false
@@ -17,8 +16,8 @@ local run = {
     bar = false
 }
 
-function ubHiredGuard:OnInitialize()
-    self.db = ub.db
+function UnderbellyBuddyHiredGuard:OnInitialize()
+    self.db = UnderbellyBuddy.db
 
     barSize = {
         width = self.db.profile.size * barBase.width,
@@ -34,48 +33,53 @@ function ubHiredGuard:OnInitialize()
     self:RegisterChatCommand('ubhide', 'HideBar')
 end
 
-function ubHiredGuard:OnEnable()
+function UnderbellyBuddyHiredGuard:OnEnable()
     local candyBar = LibStub('LibCandyBar-3.0')
 
-    ub.bar = {}
-    ub.bar.timer = candyBar:New('Interface\\AddOns\\UnderbellyBuddy\\Media\\bar', barSize.width, barSize.height)
-    ub.bar.timer:SetPoint('CENTER', ub.container)
-    ub.bar.timer:SetLabel(buffName)
-    ub.bar.timer:SetIcon(buffIcon)
-    ub.bar.timer.candyBarLabel:SetFont(fontName, barSize.font)
-    ub.bar.timer.candyBarDuration:SetFont(fontName, barSize.font)
-    ub.bar.timer:Hide()
+    UnderbellyBuddy.bar = {}
 
-    ub.bar.test = candyBar:New('Interface\\AddOns\\UnderbellyBuddy\\Media\\bar', barSize.width, barSize.height)
-    ub.bar.test:SetPoint('CENTER', ub.container)
-    ub.bar.test:SetLabel('Test Bar')
-    ub.bar.test:SetIcon(buffIcon)
-    ub.bar.test.candyBarLabel:SetFont(fontName, barSize.font)
-    ub.bar.test.candyBarDuration:SetFont(fontName, barSize.font)
-    ub.bar.test:Hide()
+    if not UnderbellyBuddy.bar.timer then
+        UnderbellyBuddy.bar.timer = candyBar:New('Interface\\AddOns\\UnderbellyBuddy\\Media\\bar', barSize.width, barSize.height)
+        UnderbellyBuddy.bar.timer:SetPoint('CENTER', UnderbellyBuddy.container)
+        UnderbellyBuddy.bar.timer:SetLabel(buffName)
+        UnderbellyBuddy.bar.timer:SetIcon(buffIcon)
+        UnderbellyBuddy.bar.timer.candyBarLabel:SetFont(fontName, barSize.font)
+        UnderbellyBuddy.bar.timer.candyBarDuration:SetFont(fontName, barSize.font)
+        UnderbellyBuddy.bar.timer:Hide()
+    end
+
+    if not UnderbellyBuddy.bar.test then
+        UnderbellyBuddy.bar.test = candyBar:New('Interface\\AddOns\\UnderbellyBuddy\\Media\\bar', barSize.width, barSize.height)
+        UnderbellyBuddy.bar.test:SetPoint('CENTER', UnderbellyBuddy.container)
+        UnderbellyBuddy.bar.test:SetLabel('Test Bar')
+        UnderbellyBuddy.bar.test:SetIcon(buffIcon)
+        UnderbellyBuddy.bar.test.candyBarLabel:SetFont(fontName, barSize.font)
+        UnderbellyBuddy.bar.test.candyBarDuration:SetFont(fontName, barSize.font)
+        UnderbellyBuddy.bar.test:Hide()
+    end
 
     self:RegisterEvent('PLAYER_ENTERING_WORLD', 'CheckBodyGuard')
     self:RegisterEvent('ZONE_CHANGED_NEW_AREA', 'CheckBodyGuard')
     self:RegisterEvent('UNIT_AURA')
 end
 
-function ubHiredGuard:OnDisable()
+function UnderbellyBuddyHiredGuard:OnDisable()
     self:UnregisterEvent('PLAYER_ENTERING_WORLD')
     self:UnregisterEvent('ZONE_CHANGED_NEW_AREA')
     self:UnregisterEvent('UNIT_AURA')
     self:StopBar()
 end
 
-function ubHiredGuard:CheckBodyGuard()
+function UnderbellyBuddyHiredGuard:CheckBodyGuard()
     inUnderbelly = self:CheckZone(GetSubZoneText())
     hasGuardBuff = self:CheckBuff()
 end
 
-function ubHiredGuard:UNIT_AURA(eventName, unit)
+function UnderbellyBuddyHiredGuard:UNIT_AURA(eventName, unit)
     self:StartBar()
 end
 
-function ubHiredGuard:CheckZone(subzone)
+function UnderbellyBuddyHiredGuard:CheckZone(subzone)
     local correctZones = {'The Underbelly', 'The Underbelly Descent', 'Circle of Wills', 'The Black Market'}
     local value
 
@@ -88,7 +92,7 @@ function ubHiredGuard:CheckZone(subzone)
     return false
 end
 
-function ubHiredGuard:CheckBuff()
+function UnderbellyBuddyHiredGuard:CheckBuff()
     local buff = UnitBuff('player', buffName)
 
     if buff == buffName then
@@ -98,15 +102,15 @@ function ubHiredGuard:CheckBuff()
     end
 end
 
-function ubHiredGuard:StartBar()
+function UnderbellyBuddyHiredGuard:StartBar()
     if inUnderbelly then
         hasGuardBuff = self:CheckBuff()
 
         if hasGuardBuff and not run.bar then
-            ub.bar.test:Hide()
-            ub.bar.timer:AddUpdateFunction(function(bar) self:CheckRemaingTime(bar) end)
-            ub.bar.timer:SetDuration(300)
-            ub.bar.timer:Start()
+            UnderbellyBuddy.bar.test:Hide()
+            UnderbellyBuddy.bar.timer:AddUpdateFunction(function(bar) self:CheckRemaingTime(bar) end)
+            UnderbellyBuddy.bar.timer:SetDuration(300)
+            UnderbellyBuddy.bar.timer:Start()
         end
 
         if not hasGuardBuff then
@@ -117,9 +121,9 @@ function ubHiredGuard:StartBar()
     end
 end
 
-function ubHiredGuard:StopBar()
+function UnderbellyBuddyHiredGuard:StopBar()
     if run.bar then
-        ub.bar.timer:Stop()
+        UnderbellyBuddy.bar.timer:Stop()
         run.bar = false
 
         for _, value in pairs(secondsToDisplayWarning) do
@@ -128,12 +132,12 @@ function ubHiredGuard:StopBar()
     end
 end
 
-function ubHiredGuard:Round(num, numDecimalPlaces)
+function UnderbellyBuddyHiredGuard:Round(num, numDecimalPlaces)
     local mult = 10^(numDecimalPlaces or 0)
     return math.floor(num * mult + 0.5) / mult
 end
 
-function ubHiredGuard:CheckRemaingTime(bar)
+function UnderbellyBuddyHiredGuard:CheckRemaingTime(bar)
     if self.db.profile.warning then
         local timeLeft = self:Round(bar.remaining, 1)
         local timeDisplay = string.format('%d seconds', timeLeft)
@@ -154,7 +158,7 @@ function ubHiredGuard:CheckRemaingTime(bar)
     run.bar = true
 end
 
-function ubHiredGuard:SetEnabled(_, value)
+function UnderbellyBuddyHiredGuard:SetEnabled(_, value)
     self.db.profile.enable = value
     
     if self.db.profile.enable then
@@ -164,41 +168,41 @@ function ubHiredGuard:SetEnabled(_, value)
     end
 end
 
-function ubHiredGuard:ShowBar() 
+function UnderbellyBuddyHiredGuard:ShowBar() 
     if run.bar then
-        ub.container:Show()  
-        ub.bar.timer:Show() 
+        UnderbellyBuddy.container:Show()  
+        UnderbellyBuddy.bar.timer:Show() 
     else 
-        ub:Print('No bar to display') 
+        UnderbellyBuddy:Print('No bar to display') 
     end 
 end
 
-function ubHiredGuard:HideBar()
+function UnderbellyBuddyHiredGuard:HideBar()
     if run.bar then
-        ub.container:Hide() 
-        ub.bar.timer:Hide() 
+        UnderbellyBuddy.container:Hide() 
+        UnderbellyBuddy.bar.timer:Hide() 
     else 
-        ub:Print('No bar to hide') 
+        UnderbellyBuddy:Print('No bar to hide') 
     end 
  end
 
-function ubHiredGuard:ShowTestBar()
+function UnderbellyBuddyHiredGuard:ShowTestBar()
     if not run.bar then
-        ub.bar.test:SetDuration(20)
-        ub.bar.test:Start()
+        UnderbellyBuddy.bar.test:SetDuration(20)
+        UnderbellyBuddy.bar.test:Start()
     else
-        ub:Print(string.format('%s is in progress and the test bar cannot be displayed.', buffName))
+        UnderbellyBuddy:Print(string.format('%s is in progress and the test bar cannot be displayed.', buffName))
     end
 end
 
-function ubHiredGuard:SetSize(_, value) 
+function UnderbellyBuddyHiredGuard:SetSize(_, value) 
     self.db.profile.size = value
     
-    ub.bar.timer:SetSize(value * barBase.width, value * barBase.height)
-    ub.bar.timer.candyBarLabel:SetFont(fontName, value * barBase.font)
-    ub.bar.timer.candyBarDuration:SetFont(fontName, value * barBase.font)
+    UnderbellyBuddy.bar.timer:SetSize(value * barBase.width, value * barBase.height)
+    UnderbellyBuddy.bar.timer.candyBarLabel:SetFont(fontName, value * barBase.font)
+    UnderbellyBuddy.bar.timer.candyBarDuration:SetFont(fontName, value * barBase.font)
 
-    ub.bar.test:SetSize(value * barBase.width, value * barBase.height)
-    ub.bar.test.candyBarLabel:SetFont(fontName, value * barBase.font)
-    ub.bar.test.candyBarDuration:SetFont(fontName, value * barBase.font)
+    UnderbellyBuddy.bar.test:SetSize(value * barBase.width, value * barBase.height)
+    UnderbellyBuddy.bar.test.candyBarLabel:SetFont(fontName, value * barBase.font)
+    UnderbellyBuddy.bar.test.candyBarDuration:SetFont(fontName, value * barBase.font)
 end
